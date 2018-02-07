@@ -175,26 +175,26 @@ frappe.ui.form.on("Fees", {
 	}
 });
 
-frappe.ui.form.on("Fees", "student", function(frm) {
-			frappe.call({
-				method: "erpnext.education.api.get_list_of_studentdetails",
-				args: {
-					"student": frm.doc.student
-				},
-				callback: function(r) {
-				console.log(r.message)
-       frm.set_value("program_enrollment", r.message[0][0]);
-       frm.set_value("program", r.message[0][1]);
-       frm.set_value("student_batch", r.message[0][4]);
-       frm.set_value("student_category", r.message[0][5]);
-       frm.set_value("academic_term", r.message[0][3]);
-       frm.set_value("academic_year", r.message[0][2]);
+// frappe.ui.form.on("Fees", "student", function(frm) {
+// 			frappe.call({
+// 				method: "erpnext.education.api.get_list_of_studentdetails",
+// 				args: {
+// 					"student": frm.doc.student
+// 				},
+// 				callback: function(r) {
+// 				console.log(r.message)
+//        frm.set_value("program_enrollment", r.message[0][0]);
+//        frm.set_value("program", r.message[0][1]);
+//        frm.set_value("student_batch", r.message[0][4]);
+//        frm.set_value("student_category", r.message[0][5]);
+//        frm.set_value("academic_term", r.message[0][3]);
+//        frm.set_value("academic_year", r.message[0][2]);
 
-				}
-			});
+// 				}
+// 			});
 
 		
-});
+// });
 
 frappe.ui.form.on("Fee Component", {
 	amount: function(frm) {

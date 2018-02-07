@@ -10,7 +10,8 @@ def get_data():
 				'items': ['Task']
 			},
 			{
-				'items': ['Course Schedule']
+				'label':_('Schedule'),
+				'items': ['Course Schedule','Course Scheduling Tool']
 			},
 			{
 				'items': ['Batch Assignment']

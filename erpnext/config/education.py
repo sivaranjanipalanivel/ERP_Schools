@@ -4,6 +4,38 @@ from frappe import _
 def get_data():
 	return [
 		{
+			"label": _("Lead Management"),
+			"items": [
+				 {
+					"type": "doctype",
+					"name": "Lead",
+					"description": _("Database of potential customers."),
+				},
+				{
+					"type": "doctype",
+					"name": "Opportunity",
+					"description": _("Potential opportunities for selling."),
+				}	
+			]
+		},
+		{
+			"label": _("Admission"),
+			"items": [
+				{
+					"type": "doctype",
+					"name": "Student Applicant"
+				},
+				{
+					"type": "doctype",
+					"name": "Program Enrollment"
+				},
+				{
+					"type": "doctype",
+					"name": "Program Enrollment Tool"
+				}
+			]
+		},
+		{
 			"label": _("Student"),
 			"items": [
 				{
@@ -25,33 +57,6 @@ def get_data():
 					"doctype": "Program Enrollment"
 				}
 
-			]
-		},
-		{
-			"label": _("Admission"),
-			"items": [
-                 {
-					"type": "doctype",
-					"name": "Lead",
-					"description": _("Database of potential customers."),
-				},
-				{
-					"type": "doctype",
-					"name": "Opportunity",
-					"description": _("Potential opportunities for selling."),
-				},
-				{
-					"type": "doctype",
-					"name": "Student Applicant"
-				},
-				{
-					"type": "doctype",
-					"name": "Program Enrollment"
-				},
-				{
-					"type": "doctype",
-					"name": "Program Enrollment Tool"
-				}
 			]
 		},
 		{

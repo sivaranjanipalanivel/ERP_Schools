@@ -1,6 +1,6 @@
 frappe.provide("education");
 
-cur_frm.add_fetch("student_group", "course", "course")
+cur_frm.add_fetch("project", "course", "course")
 frappe.ui.form.on("Course Schedule", {
 	refresh: function(frm) {
 		if (!frm.doc.__islocal) {
@@ -12,5 +12,9 @@ frappe.ui.form.on("Course Schedule", {
 				frappe.set_route("Form", "Student Attendance Tool");
 			});
 		}
+	},
+	project: function(frm) {
+		var a = frappe.doc.get_value("project", frm.doc.project, "course")
+		frm.doc.set_value("course", a);
 	}
 });
