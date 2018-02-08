@@ -18,7 +18,7 @@ frappe.ui.form.on('Batch Assignment', {
    for(var e=0; e<r.message.length; e++){
 		frappe.model.add_child(cur_frm.doc, "Student List", "students");  
         $.each(frm.doc.students || [], function(e, v) {
-        frappe.model.set_value(v.doctype, v.name, "student_no", r.message[e].name)
+        frappe.model.set_value(v.doctype, v.name, "student_number", r.message[e].name)
         frappe.model.set_value(v.doctype, v.name, "student_name", r.message[e].first_name)
         })
         frm.refresh_field("students");			

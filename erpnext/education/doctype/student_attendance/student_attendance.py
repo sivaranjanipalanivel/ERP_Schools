@@ -28,11 +28,11 @@ class StudentAttendance(Document):
 	
 	def validate_course_schedule(self):
 		if self.course_schedule:
-			self.batch = frappe.db.get_value("Course Schedule", self.course_schedule, "batch")
+			self.batch = frappe.db.get_value("Course Schedule", self.course_schedule, "project")
 	
 	def validate_student(self):
 		if self.course_schedule:
-			batch = frappe.db.get_value("Course Schedule", self.course_schedule, "batch")
+			batch = frappe.db.get_value("Course Schedule", self.course_schedule, "project")
 		else:
 			batch = self.batch
 		student_group_students = [d.student for d in get_student_group_students(batch)]

@@ -12,7 +12,7 @@ from frappe.utils import cint
 class StudentGroup(Document):
 	def validate(self):
 		self.validate_mandatory_fields()
-		self.validate_strength()
+		# self.validate_strength()
 		self.validate_students()
 		self.validate_and_set_child_table_fields()
 		validate_duplicate_student(self.students)
@@ -25,9 +25,9 @@ class StudentGroup(Document):
 		if self.group_based_on == "Batch" and not self.program:
 			frappe.throw(_("Please select Program"))
 
-	def validate_strength(self):
-		if self.max_strength and len(self.students) > self.max_strength:
-			frappe.throw(_("""Cannot enroll more than {0} students for this student group.""").format(self.max_strength))
+	# def validate_strength(self):
+	# 	if self.max_strength and len(self.students) > self.max_strength:
+	# 		frappe.throw(_("""Cannot enroll more than {0} students for this student group.""").format(self.max_strength))
 
 	def validate_students(self):
 		program_enrollment = get_program_enrollment(self.academic_year, self.academic_term, self.program, self.batch, self.course)

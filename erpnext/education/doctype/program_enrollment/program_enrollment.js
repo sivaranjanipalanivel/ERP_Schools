@@ -8,10 +8,27 @@ frappe.ui.form.on("Program Enrollment", {
 	},
 
 	onload: function(frm, cdt, cdn){
-		frm.set_query("academic_term", "fees", function(){
-			return{
-				"filters":{
+		
+		frm.set_query("academic_term", function() {
+			return {
+				"filters": {
 					"academic_year": (frm.doc.academic_year)
+				}
+			};
+		});
+
+		frm.set_query("course", function() {
+			return {
+				"filters": {
+					"program": (frm.doc.program)
+				}
+			};
+		});
+
+		frm.set_query("batch", function() {
+			return {
+				"filters": {
+					"course": (frm.doc.course)
 				}
 			};
 		});
@@ -66,6 +83,18 @@ frappe.ui.form.on("Program Enrollment", {
 
 	student_category: function() {
 		frappe.ui.form.trigger("Program Enrollment", "program");
+	},
+
+	student: function() {
+		frappe.call({
+			method: "get_studentdetail",
+			doc:frm.doc,
+			callback: function(r) {
+				if(r.message) {
+					frm.set_value("courses", r.message);
+				}
+			}
+		})
 	},
 
 	get_courses: function(frm) {

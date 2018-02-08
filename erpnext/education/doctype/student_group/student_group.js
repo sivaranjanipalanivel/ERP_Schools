@@ -9,6 +9,13 @@ frappe.ui.form.on("Student Group", {
 				}
 			};
 		});
+		frm.set_query("course", function() {
+			return {
+				"filters": {
+					"program": (frm.doc.program)
+				}
+			};
+		});
 		if (!frm.__islocal) {
 			frm.set_query("student", "students", function() {
 				return{

@@ -134,6 +134,10 @@ def get_data():
 				{
 					"type": "doctype",
 					"name": "Project"
+				},
+				{
+					"type": "doctype",
+					"name": "Course Scheduling Tool"
 				}
 			]
 		},

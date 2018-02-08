@@ -2,4 +2,4 @@
 // For license information, please see license.txt
 
 cur_frm.add_fetch("course_schedule", "schedule_date", "date");
-cur_frm.add_fetch("course_schedule", "student_group", "project")
+cur_frm.add_fetch("course_schedule", "project", "batch")
