@@ -133,6 +133,7 @@ def _make_customer(source_name, target_doc=None, ignore_permissions=False):
 
 @frappe.whitelist()
 def make_opportunity(source_name, target_doc=None):
+	update_lead_status(source_name)
 	target_doc = get_mapped_doc("Lead", source_name,
 		{"Lead": {
 			"doctype": "Opportunity",
@@ -143,11 +144,14 @@ def make_opportunity(source_name, target_doc=None):
 				"lead_name": "contact_display",
 				"company_name": "customer_name",
 				"email_id": "contact_email",
-				"mobile_no": "contact_mobile"
+				"contact_number": "contact_mobile"
 			}
 		}}, target_doc)
 
 	return target_doc
+
+def update_lead_status(lead):
+		frappe.db.set_value("Lead", lead, "status", "Opportunity")
 
 @frappe.whitelist()
 def make_quotation(source_name, target_doc=None):

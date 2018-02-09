@@ -1,12 +1,8 @@
 // Copyright (c) 2016, Frappe and contributors
 // For license information, please see license.txt
 
-
+frappe.provide("erpnext");
 frappe.ui.form.on("Program Enrollment", {
-	setup: function(frm) {
-		frm.add_fetch('fee_structure', 'total_amount', 'amount');
-	},
-
 	onload: function(frm, cdt, cdn){
 		
 		frm.set_query("academic_term", function() {
@@ -108,5 +104,31 @@ frappe.ui.form.on("Program Enrollment", {
 				}
 			}
 		})
+	},
+
+	after_save: function(frm) {
+	  $.ajax({
+		  url : window.location.origin+"/api/resource/Student Group Student",
+		  dataType: 'text',
+		  type: 'POST',
+		  contentType: 'application/json',
+		  data : JSON.stringify( {
+			  "student" : frm.doc.student,
+			  "student_name" : frm.doc.student_name,
+			  "active" : 1,
+			  "parent" : frm.doc.batch
+		  }
+		  ),
+		  beforeSend: function(xhr){
+			  xhr.setRequestHeader(
+			  'X-Frappe-CSRF-Token', frappe.csrf_token
+			  );
+		  },success: function(data){
+		  		console.log(data); 
+		  }, error: function(error){
+		  		console.log(error);
+		  }
+	  });
+		
 	}
 });

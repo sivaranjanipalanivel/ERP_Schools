@@ -36,6 +36,35 @@ def get_data():
 			]
 		},
 		{
+			"label": _("Couse Management"),
+			"items": [
+				{
+					"type": "doctype",
+					"name": "Academic Term"
+				},
+				{
+					"type": "doctype",
+					"name": "Academic Year"
+				},
+				{
+					"type": "doctype",
+					"name": "Program"
+				},
+				{
+					"type": "doctype",
+					"name": "Course"
+				},
+				{
+					"type": "doctype",
+					"name": "Project"
+				},
+				{
+					"type": "doctype",
+					"name": "Course Scheduling Tool"
+				}
+			]
+		},
+		{
 			"label": _("Student"),
 			"items": [
 				{
@@ -57,6 +86,19 @@ def get_data():
 					"doctype": "Program Enrollment"
 				}
 
+			]
+		},
+		{
+			"label": _("Staff Management"),
+			"items": [
+				{
+					"type": "doctype",
+					"name": "Employee"
+				},
+				{
+					"type": "doctype",
+					"name": "Instructor"
+				}
 			]
 		},
 		{
@@ -112,35 +154,7 @@ def get_data():
 		# 		}
 		# 	]
 		# },
-		{
-			"label": _("Couse Management"),
-			"items": [
-				{
-					"type": "doctype",
-					"name": "Academic Term"
-				},
-				{
-					"type": "doctype",
-					"name": "Academic Year"
-				},
-				{
-					"type": "doctype",
-					"name": "Program"
-				},
-				{
-					"type": "doctype",
-					"name": "Course"
-				},
-				{
-					"type": "doctype",
-					"name": "Project"
-				},
-				{
-					"type": "doctype",
-					"name": "Course Scheduling Tool"
-				}
-			]
-		},
+		
 		{
 			"label": _("Fees Management"),
 			"items": [
@@ -227,10 +241,6 @@ def get_data():
 		{
 			"label": _("Setup"),
 			"items": [
-				{
-					"type": "doctype",
-					"name": "Instructor"
-				},
 				{
 					"type": "doctype",
 					"name": "Room"

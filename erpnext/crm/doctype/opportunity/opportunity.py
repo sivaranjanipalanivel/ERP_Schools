@@ -301,6 +301,28 @@ def make_supplier_quotation(source_name, target_doc=None):
 	return doclist
 
 @frappe.whitelist()
+def create_applicant(source_name, target_doc=None):
+	update_opp_status(source_name)
+	target_doc = get_mapped_doc("Opportunity", source_name,
+		{"Opportunity": {
+			"doctype": "Student Applicant",
+			"field_map": {
+				"customer_name": "first_name",
+				"contact_email": "student_email_id",
+				"contact_mobile": "student_mobile_number",
+				"branch": "branch",
+				"program": "program",
+				"course": "course",
+				"name": "opportunity"
+			}
+		}}, target_doc)
+
+	return target_doc
+
+def update_opp_status(lead):
+	frappe.db.set_value("Opportunity", lead, "status", "Converted")
+
+@frappe.whitelist()
 def set_multiple_status(names, status):
 	names = json.loads(names)
 	for name in names:

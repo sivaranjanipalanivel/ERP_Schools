@@ -347,3 +347,8 @@ def get_students():
 @frappe.whitelist()
 def get_cost_center_name(project):
 	return frappe.db.get_value("Project", project, "cost_center")
+
+# 	@frappe.whitelist()
+# def get_batch_details(instructor):
+#    data = frappe.db.sql("""SELECT instructor.name FROM `tabProject` as project INNER JOIN `tabInstructor` AS instructor ON instructor.instructor_name=project.instructor WHERE instructor.employee=%s""",(instructor))
+# 	return data

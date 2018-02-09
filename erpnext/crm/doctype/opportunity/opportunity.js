@@ -30,6 +30,16 @@ frappe.ui.form.on("Opportunity", {
 		frm.toggle_reqd("lead", frm.doc.enquiry_from==="Lead");
 		frm.toggle_reqd("customer", frm.doc.enquiry_from==="Customer");
 	},
+	onload: function(frm, cdt, cdn){
+
+		frm.set_query("course", function() {
+			return {
+				"filters": {
+					"program": (frm.doc.program)
+				}
+			};
+		});
+	},
 
 	refresh: function(frm) {
 		var doc = frm.doc;
@@ -48,12 +58,18 @@ frappe.ui.form.on("Opportunity", {
 			// frm.add_custom_button(__('Quotation'),
 			// 	cur_frm.cscript.create_quotation, __("Make"));
 
+			if(cur_frm.doc.status !== "Converted"){
+				frm.add_custom_button(__('Covert to Applicant'),
+					function() {
+						frm.trigger("create_applicant")
+					}).addClass("btn-primary");
+			}
 			if(doc.status!=="Quotation") {
 				frm.add_custom_button(__('Lost'),
 					cur_frm.cscript['Declare Opportunity Lost']);
 			}
+			
 		}
-
 		if(!frm.doc.__islocal && frm.perm[0].write && frm.doc.docstatus==0) {
 			if(frm.doc.status==="Open") {
 				frm.add_custom_button(__("Close"), function() {
@@ -80,6 +96,13 @@ frappe.ui.form.on("Opportunity", {
 	make_supplier_quotation: function(frm) {
 		frappe.model.open_mapped_doc({
 			method: "erpnext.crm.doctype.opportunity.opportunity.make_supplier_quotation",
+			frm: cur_frm
+		})
+	},
+
+	create_applicant: function() {
+		frappe.model.open_mapped_doc({
+			method: "erpnext.crm.doctype.opportunity.opportunity.create_applicant",
 			frm: cur_frm
 		})
 	},
@@ -113,6 +136,8 @@ erpnext.crm.Opportunity = frappe.ui.form.Controller.extend({
 				{ company:frappe.defaults.get_user_default("Company") });
 
 		this.setup_queries();
+
+
 	},
 
 	setup_queries: function() {

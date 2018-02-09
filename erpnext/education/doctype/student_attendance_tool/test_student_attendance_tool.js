@@ -12,8 +12,8 @@ QUnit.test('Test: Student Attendace Tool', function(assert){
 		() => frappe.timeout(0.5),
 
 		() => {
-			if(cur_frm.doc.based_on == 'Student Group' || cur_frm.doc.based_on == 'Course Schedule'){
-				cur_frm.doc.based_on = 'Student Group';
+			if(cur_frm.doc.based_on == 'Batch' || cur_frm.doc.based_on == 'Course Schedule'){
+				cur_frm.doc.based_on = 'Batch';
 				assert.equal(1, 1, 'Attendance basis correctly set');
 				cur_frm.set_value("group_based_on", 'Batch');
 				cur_frm.set_value("student_group", "test-batch-wise-group");

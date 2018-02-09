@@ -30,9 +30,9 @@ erpnext.LeadController = frappe.ui.form.Controller.extend({
 		frappe.dynamic_link = {doc: doc, fieldname: 'name', doctype: 'Lead'}
 
 		if(!doc.__islocal && doc.__onload && !doc.__onload.is_customer) {
-			this.frm.add_custom_button(__("Customer"), this.create_customer, __("Make"));
-			this.frm.add_custom_button(__("Opportunity"), this.create_opportunity, __("Make"));
-			this.frm.add_custom_button(__("Quotation"), this.make_quotation, __("Make"));
+			if(cur_frm.doc.status !== "Opportunity"){
+				this.frm.add_custom_button(__("Covert to Opportunity"), this.create_opportunity).addClass("btn-primary");
+			}
 		}
 
 		if(!this.frm.doc.__islocal) {
@@ -81,7 +81,7 @@ erpnext.LeadController = frappe.ui.form.Controller.extend({
 frappe.ui.form.on('Lead', {
 	after_save: function() {
 		if (!cur_frm.doc.__islocal) {
-			if(cur_frm.doc.status === "Opportunity"){
+			if(cur_frm.doc.status == "Opportunity"){
 	  $.ajax({
 	  url : window.location.origin+"/api/resource/Opportunity",
 	  dataType: 'text',

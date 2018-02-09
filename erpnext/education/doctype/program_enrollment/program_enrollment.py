@@ -20,7 +20,7 @@ class ProgramEnrollment(Document):
 	def on_submit(self):
 		self.update_student_joining_date()
 		self.make_fee_records()
-		self.create_student_group()
+		# self.create_student_group()
 	
 	def validate_duplication(self):
 		enrollment = frappe.get_all("Program Enrollment", filters={
@@ -38,13 +38,13 @@ class ProgramEnrollment(Document):
 		date = frappe.db.sql("select min(enrollment_date) from `tabProgram Enrollment` where student= %s", self.student)
 		frappe.db.set_value("Student", self.student, "joining_date", date)
 
-	def create_student_group(self):
-		prog_enrollment = frappe.new_doc("Student Group Student")
-		prog_enrollment.student = self.student
-		prog_enrollment.student_name = self.student_name
-		prog_enrollment.active = 1
-		prog_enrollment.batch = self.batch
-		prog_enrollment.save()
+	# def create_student_group(self):
+	# 	prog_enrollment = frappe.new_doc("Student Group Student")
+	# 	prog_enrollment.student = self.student
+	# 	prog_enrollment.student_name = self.student_name
+	# 	prog_enrollment.active = 1
+	# 	prog_enrollment.batch = self.batch
+	# 	prog_enrollment.save()
 
 	def make_fee_records(self):
 		from erpnext.education.api import get_fee_components

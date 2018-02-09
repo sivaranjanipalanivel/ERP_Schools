@@ -146,5 +146,17 @@ frappe.ui.form.on("Project Task", {
 
 	status: function(frm, doctype, name) {
 		frm.trigger('tasks_refresh');
+		//  frappe.call({
+		// 	method: "erpnext.crm.doctype.project.project.get_batch_details",
+		// 	args: {"instructor":frm.doc.instru},
+		// 	callback: function(r, rt) {
+		// 		if(r.message) {
+		// 			$.each(r.message, function(k, v) {
+		// 				frappe.model.set_value(cdt, cdn, k, v);
+		// 			});
+		// 			refresh_field('image_view', d.name, 'items');
+		// 		}
+		// 	}
+		// })
 	},
 });
