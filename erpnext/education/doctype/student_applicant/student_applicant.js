@@ -6,25 +6,6 @@ frappe.ui.form.on("Student Applicant", {
 		frm.add_fetch("guardian", "guardian_name", "guardian_name");
 	},
 
-	onload: function(frm, cdt, cdn){
-		
-		frm.set_query("academic_term", function() {
-			return {
-				"filters": {
-					"academic_year": (frm.doc.academic_year)
-				}
-			};
-		});
-
-		frm.set_query("course", function() {
-			return {
-				"filters": {
-					"program": (frm.doc.program)
-				}
-			};
-		});
-	},
-
 	refresh: function(frm) {
 		if(frm.doc.application_status== "Applied" && frm.doc.docstatus== 1 ) {
 			frm.add_custom_button(__("Approve"), function() {

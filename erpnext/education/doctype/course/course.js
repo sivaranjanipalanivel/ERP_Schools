@@ -7,12 +7,12 @@ frappe.ui.form.on("Course", "refresh", function(frm) {
 			frappe.set_route("List", "Program");
 		});
 		
-		// frm.add_custom_button(__("Student Group"), function() {
-		// 	frappe.route_options = {
-		// 		course: frm.doc.name
-		// 	}
-		// 	frappe.set_route("List", "Student Group");
-		// });
+		frm.add_custom_button(__("Student Group"), function() {
+			frappe.route_options = {
+				course: frm.doc.name
+			}
+			frappe.set_route("List", "Student Group");
+		});
 		
 		frm.add_custom_button(__("Course Schedule"), function() {
 			frappe.route_options = {

@@ -4,13 +4,13 @@ frappe.provide("education");
 
 frappe.ui.form.on('Student Attendance Tool', {
 	onload: function(frm) {
-		// frm.set_query("batch", function() {
-		// 	return {
-		// 		"filters": {
-		// 			"group_based_on": frm.doc.group_based_on
-		// 		}
-		// 	};
-		// });
+		frm.set_query("student_group", function() {
+			return {
+				"filters": {
+					"group_based_on": frm.doc.group_based_on
+				}
+			};
+		});
 	},
 
 	refresh: function(frm) {
@@ -24,23 +24,23 @@ frappe.ui.form.on('Student Attendance Tool', {
 	},
 
 	based_on: function(frm) {
-		if (frm.doc.based_on == "Batch") {
+		if (frm.doc.based_on == "Student Group") {
 			frm.set_value("course_schedule", "");
 		} else {
-			frm.set_value("batch", "");
+			frm.set_value("student_group", "");
 		}
 	},
 
-	batch: function(frm) {
-		if ((frm.doc.batch && frm.doc.date) || frm.doc.course_schedule) {
+	student_group: function(frm) {
+		if ((frm.doc.student_group && frm.doc.date) || frm.doc.course_schedule) {
 			var method = "erpnext.education.doctype.student_attendance_tool.student_attendance_tool.get_student_attendance_records";
 
 			frappe.call({
 				method: method,
 				args: {
 					based_on: frm.doc.based_on,
-					batch: frm.doc.batch,
-					student_group: frm.doc.date,
+					student_group: frm.doc.student_group,
+					date: frm.doc.date,
 					course_schedule: frm.doc.course_schedule
 				},
 				callback: function(r) {
@@ -51,11 +51,11 @@ frappe.ui.form.on('Student Attendance Tool', {
 	},
 
 	date: function(frm) {
-		frm.trigger("batch");
+		frm.trigger("student_group");
 	},
 
 	course_schedule: function(frm) {
-		frm.trigger("batch");
+		frm.trigger("student_group");
 	},
 
 	get_students: function(frm, students) {
@@ -143,13 +143,13 @@ education.StudentsEditor = Class.extend({
 								args: {
 									"students_present": students_present,
 									"students_absent": students_absent,
-									"student_group": frm.doc.batch,
+									"student_group": frm.doc.student_group,
 									"course_schedule": frm.doc.course_schedule,
 									"date": frm.doc.date
 								},
 								callback: function(r) {
 									$(me.wrapper.find(".btn-mark-att")).attr("disabled", false);
-									frm.trigger("batch");
+									frm.trigger("student_group");
 								}
 							});
 						}
@@ -175,7 +175,7 @@ education.StudentsEditor = Class.extend({
 	show_empty_state: function() {
 		$(this.wrapper).html(
 			`<div class="text-center text-muted" style="line-height: 100px;">
-				${__("No Students in")} ${this.frm.doc.batch}
+				${__("No Students in")} ${this.frm.doc.student_group}
 			</div>`
 		);
 	}

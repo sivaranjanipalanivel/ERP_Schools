@@ -1,30 +1,17 @@
 // Copyright (c) 2016, Frappe and contributors
 // For license information, please see license.txt
 
-frappe.provide("erpnext");
+
 frappe.ui.form.on("Program Enrollment", {
+	setup: function(frm) {
+		frm.add_fetch('fee_structure', 'total_amount', 'amount');
+	},
+
 	onload: function(frm, cdt, cdn){
-		
-		frm.set_query("academic_term", function() {
-			return {
-				"filters": {
+		frm.set_query("academic_term", "fees", function(){
+			return{
+				"filters":{
 					"academic_year": (frm.doc.academic_year)
-				}
-			};
-		});
-
-		frm.set_query("course", function() {
-			return {
-				"filters": {
-					"program": (frm.doc.program)
-				}
-			};
-		});
-
-		frm.set_query("batch", function() {
-			return {
-				"filters": {
-					"course": (frm.doc.course)
 				}
 			};
 		});
@@ -81,18 +68,6 @@ frappe.ui.form.on("Program Enrollment", {
 		frappe.ui.form.trigger("Program Enrollment", "program");
 	},
 
-	student: function() {
-		frappe.call({
-			method: "get_studentdetail",
-			doc:frm.doc,
-			callback: function(r) {
-				if(r.message) {
-					frm.set_value("courses", r.message);
-				}
-			}
-		})
-	},
-
 	get_courses: function(frm) {
 		frm.set_value("courses",[]);
 		frappe.call({
@@ -104,31 +79,5 @@ frappe.ui.form.on("Program Enrollment", {
 				}
 			}
 		})
-	},
-
-	after_save: function(frm) {
-	  $.ajax({
-		  url : window.location.origin+"/api/resource/Student Group Student",
-		  dataType: 'text',
-		  type: 'POST',
-		  contentType: 'application/json',
-		  data : JSON.stringify( {
-			  "student" : frm.doc.student,
-			  "student_name" : frm.doc.student_name,
-			  "active" : 1,
-			  "parent" : frm.doc.batch
-		  }
-		  ),
-		  beforeSend: function(xhr){
-			  xhr.setRequestHeader(
-			  'X-Frappe-CSRF-Token', frappe.csrf_token
-			  );
-		  },success: function(data){
-		  		console.log(data); 
-		  }, error: function(error){
-		  		console.log(error);
-		  }
-	  });
-		
 	}
 });

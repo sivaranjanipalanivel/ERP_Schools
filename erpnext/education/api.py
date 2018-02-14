@@ -41,11 +41,6 @@ def enroll_student(source_name):
 	frappe.publish_realtime('enroll_student_progress', {"progress": [4, 4]}, user=frappe.session.user)	
 	return program_enrollment
 
-@frappe.whitelist()
-def get_list_of_studentdetails(student):
-	datas=frappe.db.sql("""SELECT pay_enrollment.student, pay_enrollment.program, pay_enrollment.academic_year, pay_enrollment.academic_term, pay_enrollment.student_batch_name, pay_enrollment.student_category FROM `tabStudent` as student INNER JOIN `tabProgram Enrollment` AS pay_enrollment ON student.name=pay_enrollment.student WHERE student.name=%s""",(student))
-	return datas
-
 
 @frappe.whitelist()
 def check_attendance_records_exist(course_schedule=None, student_group=None, date=None):

@@ -126,4 +126,3 @@ def get_list_context(context=None):
 		"get_list": get_fee_list,
 		"row_template": "templates/includes/fee/fee_row.html"
 	}
-

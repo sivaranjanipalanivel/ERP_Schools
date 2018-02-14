@@ -9,13 +9,6 @@ frappe.ui.form.on("Student Group", {
 				}
 			};
 		});
-		frm.set_query("course", function() {
-			return {
-				"filters": {
-					"program": (frm.doc.program)
-				}
-			};
-		});
 		if (!frm.__islocal) {
 			frm.set_query("student", "students", function() {
 				return{
@@ -54,6 +47,18 @@ frappe.ui.form.on("Student Group", {
 					student_group: frm.doc.name
 				}
 				frappe.set_route("List", "Assessment Plan");
+			});
+			frm.add_custom_button(__("Assignment"), function() {
+				frappe.route_options = {
+					student_group: frm.doc.name
+				}
+				frappe.set_route("List", "Assignments");
+			});
+			frm.add_custom_button(__("Discussion"), function() {
+				frappe.route_options = {
+					student_group: frm.doc.name
+				}
+				frappe.set_route("List", "Discussion");
 			});
 			frm.add_custom_button(__("Update Email Group"), function() {
 				frappe.call({
