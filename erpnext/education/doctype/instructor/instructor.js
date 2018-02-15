@@ -15,6 +15,18 @@ frappe.ui.form.on("Instructor", "refresh", function(frm) {
 			}
 			frappe.set_route("List", "Course Schedule");
 		});
+		frm.add_custom_button(__("Daily Task"), function() {
+				frappe.route_options = {
+					instructor: frm.doc.name
+				}
+				frappe.set_route("List", "Daily Task");
+		});
+		frm.add_custom_button(__("Staff Timesheet"), function() {
+				frappe.route_options = {
+					instructor: frm.doc.name
+				}
+				frappe.set_route("List", "Staff Timesheet");
+		});
 		frm.add_custom_button(__("As Examiner"), function() {
 			frappe.route_options = {
 				examiner: frm.doc.name

@@ -179,13 +179,14 @@ def get_data():
 		{
 			"label": _("Setup"),
 			"items": [
-				{
-					"type": "doctype",
-					"name": "Course"
-				},
+				
 				{
 					"type": "doctype",
 					"name": "Program"
+				},
+				{
+					"type": "doctype",
+					"name": "Staff Timesheet"
 				},
 				{
 					"type": "doctype",
@@ -219,6 +220,27 @@ def get_data():
 					"type": "doctype",
 					"name": "Education Settings"
 				}
+			]
+		},
+		{
+			"label": _("LMS"),
+			"items": [
+				{
+					"type": "doctype",
+					"name": "Course"
+				},
+				{
+					"type": "doctype",
+					"name": "Chapter"
+				},
+				{
+					"type": "doctype",
+					"name": "Section"
+				},
+				{
+					"type": "doctype",
+					"name": "Questions"
+				},
 			]
 		},
 	]

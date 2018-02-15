@@ -6,5 +6,5 @@ from __future__ import unicode_literals
 import frappe
 import unittest
 
-class TestBatchAssignment(unittest.TestCase):
+class TestDailyTask(unittest.TestCase):
 	pass
